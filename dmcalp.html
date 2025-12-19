@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMCA Masters | Stop Content Theft</title>
+    <meta name="description" content="Stop losing revenue to content pirates. We find and remove stolen content in 24-48 hours.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0F1419',
+                            purple: '#6B46C1',
+                            pink: '#FF006E',
+                            orange: '#FF6B35',
+                            light: '#E5E7EB',
+                            white: '#FFFFFF'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles for gradients and specifics */
+        body {
+            background-color: #0F1419;
+            color: #E5E7EB;
+            overflow-x: hidden;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #1a0b2e 0%, #0F1419 100%);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #FF006E, #FF6B35);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-gradient {
+            background: linear-gradient(90deg, #FF006E 0%, #FF6B35 100%);
+            transition: all 0.3s ease;
+        }
+
+        .btn-gradient:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 0, 110, 0.5);
+        }
+
+        .pain-gradient {
+            background: linear-gradient(180deg, #2D0505 0%, #0F1419 100%);
+        }
+
+        .card-glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Accordion Transition */
+        .accordion-content {
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+        }
+        .accordion-content.active {
+            max-height: 200px; /* Approximate max height */
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-[#0F1419]/90 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-brand-pink text-2xl"></i>
+                    <span class="font-heading font-bold text-xl text-white">DMCA Masters</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#how-it-works" class="hover:text-brand-pink px-3 py-2 rounded-md text-sm font-medium transition-colors">How It Works</a>
+                        <a href="#results" class="hover:text-brand-pink px-3 py-2 rounded-md text-sm font-medium transition-colors">Results</a>
+                        <a href="#pricing" class="hover:text-brand-pink px-3 py-2 rounded-md text-sm font-medium transition-colors">Pricing</a>
+                        <button onclick="openTrialModal()" class="bg-brand-pink hover:bg-pink-600 text-white px-4 py-2 rounded-full text-sm font-bold transition-colors">Start Free Trial</button>
+                    </div>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" onclick="toggleMobileMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-[#0F1419] border-b border-white/10" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#how-it-works" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">How It Works</a>
+                <a href="#results" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Results</a>
+                <a href="#pricing" class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Pricing</a>
+                <button onclick="openTrialModal()" class="text-brand-pink font-bold block px-3 py-2 rounded-md text-base text-left w-full">Start Free Trial</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex items-center hero-gradient pt-16 overflow-hidden">
+        <canvas id="particles-js"></canvas>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
+            <!-- Left: Copy -->
+            <div class="text-center md:text-left pt-10 md:pt-0">
+                <div class="inline-block bg-red-500/10 border border-red-500/50 rounded-full px-4 py-1 mb-6 animate-pulse">
+                    <p class="text-red-500 font-bold text-xs uppercase tracking-wider">
+                        <i class="fa-solid fa-triangle-exclamation mr-2"></i> Your Content Is Being Stolen Right Now
+                    </p>
+                </div>
+                
+                <h1 class="font-heading text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6">
+                    Stop Losing <span class="text-gradient">$5,000+ Per Month</span> to Content Pirates
+                </h1>
+                
+                <p class="text-gray-300 text-lg md:text-xl mb-8 leading-relaxed max-w-lg mx-auto md:mx-0">
+                    We find, remove, and eliminate leaked content in 24-48 hours—so you keep 100% of your earnings. Guaranteed.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <button onclick="openTrialModal()" class="btn-gradient text-white font-bold text-lg px-8 py-4 rounded-full shadow-lg shadow-pink-500/30 flex items-center justify-center gap-3 animate-pulse-fast">
+                        <i class="fa-solid fa-shield-halved"></i> Get Your FREE Content Audit
+                    </button>
+                </div>
+                <p class="mt-3 text-sm text-gray-400 text-center md:text-left">(Worth $297 - No credit card required)</p>
+
+                <!-- Trust Elements -->
+                <div class="mt-8 grid grid-cols-2 gap-4 text-sm text-gray-400">
+                    <div class="flex items-center gap-2 justify-center md:justify-start"><i class="fa-solid fa-check text-green-400"></i> Used by 2,000+ creators</div>
+                    <div class="flex items-center gap-2 justify-center md:justify-start"><i class="fa-solid fa-check text-green-400"></i> 50,000+ leaks removed</div>
+                    <div class="flex items-center gap-2 justify-center md:justify-start"><i class="fa-solid fa-check text-green-400"></i> 98.7% takedown success</div>
+                    <div class="flex items-center gap-2 justify-center md:justify-start"><i class="fa-solid fa-check text-green-400"></i> 24-48hr turnaround</div>
+                </div>
+            </div>
+
+            <!-- Right: Visual -->
+            <div class="relative hidden md:block animate-float">
+                <div class="bg-gradient-to-tr from-brand-purple to-brand-pink p-1 rounded-2xl shadow-2xl shadow-purple-500/20">
+                    <div class="bg-gray-900 rounded-xl p-6 overflow-hidden relative">
+                        <!-- Mockup of Protection Dashboard -->
+                        <div class="flex justify-between items-center mb-6 border-b border-gray-700 pb-4">
+                            <div class="flex gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <div class="text-xs text-gray-500">DMCA Masters Shield v2.4</div>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <!-- Simulated Scan Result -->
+                            <div class="bg-gray-800/50 p-3 rounded border border-gray-700 flex justify-between items-center">
+                                <div class="flex items-center gap-3">
+                                    <div class="bg-red-500/20 p-2 rounded text-red-500"><i class="fa-brands fa-telegram"></i></div>
+                                    <div>
+                                        <div class="text-sm font-bold text-white">Telegram Group Leak</div>
+                                        <div class="text-xs text-red-400">High Severity • 15k Views</div>
+                                    </div>
+                                </div>
+                                <span class="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">REMOVED</span>
+                            </div>
+
+                            <div class="bg-gray-800/50 p-3 rounded border border-gray-700 flex justify-between items-center">
+                                <div class="flex items-center gap-3">
+                                    <div class="bg-red-500/20 p-2 rounded text-red-500"><i class="fa-solid fa-globe"></i></div>
+                                    <div>
+                                        <div class="text-sm font-bold text-white">Tube Site Mirror</div>
+                                        <div class="text-xs text-red-400">Medium Severity • 4k Views</div>
+                                    </div>
+                                </div>
+                                <span class="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">REMOVED</span>
+                            </div>
+
+                            <div class="bg-gray-800/50 p-3 rounded border border-gray-700 flex justify-between items-center">
+                                <div class="flex items-center gap-3">
+                                    <div class="bg-red-500/20 p-2 rounded text-red-500"><i class="fa-brands fa-discord"></i></div>
+                                    <div>
+                                        <div class="text-sm font-bold text-white">Discord Server Archive</div>
+                                        <div class="text-xs text-red-400">Critical Severity • 50k Members</div>
+                                    </div>
+                                </div>
+                                <span class="bg-green-500/20 text-green-400 text-xs font-bold px-2 py-1 rounded">REMOVED</span>
+                            </div>
+                            
+                            <div class="mt-6 text-center">
+                                <div class="inline-block bg-green-500/10 text-green-400 text-xs font-bold px-3 py-1 rounded-full animate-pulse">
+                                    <i class="fa-solid fa-radar"></i> Scanning 1,200+ Sites Live...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Pain Points Section -->
+    <section class="py-20 pain-gradient relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl md:text-5xl font-bold text-white mb-4">
+                    If This Sounds Like You, <br><span class="text-red-500">You're Losing Money</span> Every Day
+                </h2>
+                <div class="w-24 h-1 bg-red-500 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Pain Card 1 -->
+                <div class="card-glass p-6 rounded-xl hover:bg-white/5 transition duration-300">
+                    <div class="bg-red-500/20 w-14 h-14 rounded-full flex items-center justify-center text-red-500 text-2xl mb-4">
+                        <i class="fa-solid fa-magnifying-glass-location"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3 text-white">Finding Content Everywhere</h3>
+                    <p class="text-gray-400 text-sm">Your exclusive photos show up on random sites, Telegram groups, and Discord servers without permission.</p>
+                </div>
+
+                <!-- Pain Card 2 -->
+                <div class="card-glass p-6 rounded-xl hover:bg-white/5 transition duration-300">
+                    <div class="bg-red-500/20 w-14 h-14 rounded-full flex items-center justify-center text-red-500 text-2xl mb-4">
+                        <i class="fa-solid fa-chart-line-down"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3 text-white">Watching Income Drop</h3>
+                    <p class="text-gray-400 text-sm">You work hard, but pirates steal it and give it away for free. Your subscriber count stays flat or drops.</p>
+                </div>
+
+                <!-- Pain Card 3 -->
+                <div class="card-glass p-6 rounded-xl hover:bg-white/5 transition duration-300">
+                    <div class="bg-red-500/20 w-14 h-14 rounded-full flex items-center justify-center text-red-500 text-2xl mb-4">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3 text-white">Wasting Hours Weekly</h3>
+                    <p class="text-gray-400 text-sm">You spend creative time hunting down leaks and filing forms that go nowhere.</p>
+                </div>
+
+                <!-- Pain Card 4 -->
+                <div class="card-glass p-6 rounded-xl hover:bg-white/5 transition duration-300">
+                    <div class="bg-red-500/20 w-14 h-14 rounded-full flex items-center justify-center text-red-500 text-2xl mb-4">
+                        <i class="fa-solid fa-face-sad-tear"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3 text-white">Feeling Violated</h3>
+                    <p class="text-gray-400 text-sm">It's not just money—it's personal. Your private content is stolen, and platforms ignore you.</p>
+                </div>
+            </div>
+
+            <div class="mt-16 text-center">
+                <p class="font-heading text-2xl md:text-3xl text-white font-bold">
+                    The average creator loses <span class="text-red-500 border-b-2 border-red-500">$60,000/year</span> to content theft.
+                </p>
+                <p class="text-gray-400 mt-2 text-lg">How much are YOU losing?</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="how-it-works" class="py-20 bg-white text-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-brand-purple font-bold tracking-wider uppercase text-sm">The Solution</span>
+                <h2 class="font-heading text-3xl md:text-5xl font-bold text-gray-900 mt-2 mb-4">
+                    Your Personal <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-purple to-brand-pink">Content Protection Army</span>
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">We hunt down stolen content 24/7 across 1,200+ piracy sites, tube sites, forums, and social platforms—then eliminate it permanently.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-12 relative">
+                <!-- Connector Line (Desktop) -->
+                <div class="hidden md:block absolute top-12 left-[16%] right-[16%] h-1 bg-gray-200 z-0"></div>
+
+                <!-- Step 1 -->
+                <div class="relative z-10 text-center">
+                    <div class="w-24 h-24 bg-white border-4 border-brand-purple rounded-full flex items-center justify-center text-3xl text-brand-purple mx-auto mb-6 shadow-xl">
+                        <i class="fa-solid fa-radar"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-2xl mb-3">1. We Hunt</h3>
+                    <p class="text-gray-600 px-4">Our AI-powered system scans the internet 24/7, finding every leak, repost, and pirated version of your content.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="relative z-10 text-center">
+                    <div class="w-24 h-24 bg-white border-4 border-brand-pink rounded-full flex items-center justify-center text-3xl text-brand-pink mx-auto mb-6 shadow-xl">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-2xl mb-3">2. We Strike</h3>
+                    <p class="text-gray-600 px-4">We file aggressive DMCA takedown notices with our legal team's signature. 98.7% removal rate within 48 hours.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="relative z-10 text-center">
+                    <div class="w-24 h-24 bg-white border-4 border-brand-orange rounded-full flex items-center justify-center text-3xl text-brand-orange mx-auto mb-6 shadow-xl">
+                        <i class="fa-solid fa-shield-cat"></i>
+                    </div>
+                    <h3 class="font-heading font-bold text-2xl mb-3">3. We Protect</h3>
+                    <p class="text-gray-600 px-4">Continuous monitoring and repeat offender tracking ensures your content stays protected long-term.</p>
+                </div>
+            </div>
+
+            <div class="mt-16 text-center">
+                <button onclick="openTrialModal()" class="inline-block bg-brand-purple text-white font-bold px-8 py-4 rounded-full hover:bg-purple-800 transition shadow-lg text-lg">
+                    Start Your Free Trial <i class="fa-solid fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="results" class="py-20 bg-[#0F1419] border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-3xl md:text-5xl font-bold text-white mb-4">
+                    Real Creators. Real Results.
+                </h2>
+                <p class="text-gray-400">Join the elite creators who protect their empire.</p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
+                <div class="text-center p-6 bg-gray-800/30 rounded-xl border border-gray-700">
+                    <div class="text-3xl md:text-4xl font-bold text-brand-purple mb-2">$<span class="counter" data-target="12">0</span>.4M+</div>
+                    <div class="text-gray-400 text-sm uppercase tracking-wide">Revenue Protected</div>
+                </div>
+                <div class="text-center p-6 bg-gray-800/30 rounded-xl border border-gray-700">
+                    <div class="text-3xl md:text-4xl font-bold text-brand-pink mb-2"><span class="counter" data-target="50">0</span>k+</div>
+                    <div class="text-gray-400 text-sm uppercase tracking-wide">Leaks Removed</div>
+                </div>
+                <div class="text-center p-6 bg-gray-800/30 rounded-xl border border-gray-700">
+                    <div class="text-3xl md:text-4xl font-bold text-brand-orange mb-2"><span class="counter" data-target="24">0</span>h</div>
+                    <div class="text-gray-400 text-sm uppercase tracking-wide">Avg Takedown</div>
+                </div>
+                <div class="text-center p-6 bg-gray-800/30 rounded-xl border border-gray-700">
+                    <div class="text-3xl md:text-4xl font-bold text-white mb-2">98.7%</div>
+                    <div class="text-gray-400 text-sm uppercase tracking-wide">Success Rate</div>
+                </div>
+            </div>
+
+            <!-- Testimonials -->
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-800/50 p-8 rounded-xl border border-gray-700 relative">
+                    <i class="fa-solid fa-quote-left text-gray-700 text-4xl absolute top-6 left-6"></i>
+                    <p class="text-gray-300 relative z-10 mb-6 italic pt-6">"I was losing $3,000/month to leaks. Within 2 weeks of using DMCA Masters, my subscriber count increased 40%. Best investment ever."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold">SM</div>
+                        <div>
+                            <div class="text-white font-bold">Sarah M.</div>
+                            <div class="text-brand-pink text-xs">Top 0.8% Creator</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800/50 p-8 rounded-xl border border-gray-700 relative">
+                    <i class="fa-solid fa-quote-left text-gray-700 text-4xl absolute top-6 left-6"></i>
+                    <p class="text-gray-300 relative z-10 mb-6 italic pt-6">"I tried doing this myself for months. Total waste of time. These guys removed 50+ leaks in the first week alone. I can finally focus on creating."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center text-white font-bold">JT</div>
+                        <div>
+                            <div class="text-white font-bold">Jessica T.</div>
+                            <div class="text-brand-pink text-xs">Top 1.2% Creator</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800/50 p-8 rounded-xl border border-gray-700 relative">
+                    <i class="fa-solid fa-quote-left text-gray-700 text-4xl absolute top-6 left-6"></i>
+                    <p class="text-gray-300 relative z-10 mb-6 italic pt-6">"The ROI is insane. I pay them X and they've helped me earn an extra $8,000/month. No-brainer."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">A</div>
+                        <div>
+                            <div class="text-white font-bold">Anonymous</div>
+                            <div class="text-brand-pink text-xs">Top 0.3% Creator</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Prop Comparison -->
+    <section class="py-20 bg-gradient-to-r from-gray-900 to-gray-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-heading text-3xl font-bold text-white mb-4">DIY Content Protection vs. DMCA Masters</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-0 border border-gray-700 rounded-2xl overflow-hidden">
+                <!-- DIY Side -->
+                <div class="bg-gray-900/50 p-8">
+                    <h3 class="text-xl font-bold text-gray-400 mb-6 text-center">Doing It Yourself</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                            <span class="text-gray-400">Spend 10-15 hours/week hunting leaks</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                            <span class="text-gray-400">Most takedown requests ignored</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                            <span class="text-gray-400">Miss 80% of piracy sites</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                            <span class="text-gray-400">Costs you $5,000+/mo in lost revenue</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                            <span class="text-gray-400">Stressful, violating, exhausting</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- DMCA Masters Side -->
+                <div class="bg-brand-purple/10 p-8 border-l border-gray-700 relative">
+                    <div class="absolute top-0 right-0 bg-brand-pink text-white text-xs font-bold px-3 py-1 rounded-bl-lg">WINNER</div>
+                    <h3 class="text-xl font-bold text-white mb-6 text-center">DMCA Masters</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-400 mt-1"></i>
+                            <span class="text-white font-medium">We do everything for you</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-400 mt-1"></i>
+                            <span class="text-white font-medium">98.7% removal success rate</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-400 mt-1"></i>
+                            <span class="text-white font-medium">Monitor 1,200+ platforms 24/7</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-400 mt-1"></i>
+                            <span class="text-white font-medium">ROI: 10X+ your investment</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-400 mt-1"></i>
+                            <span class="text-white font-medium">Peace of mind guaranteed</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center text-xl font-bold text-white">
+                Your time is worth more than this. Let us handle it.
+            </div>
+        </div>
+    </section>
+
+    <!-- Irresistible Offer Section -->
+    <section id="offer" class="py-20 bg-[#0F1419] relative overflow-hidden">
+        <div class="absolute inset-0 bg-brand-purple/5"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="p-1 rounded-3xl bg-gradient-to-r from-brand-pink via-purple-500 to-brand-orange animate-pulse-slow">
+                <div class="bg-[#0F1419] rounded-[22px] p-8 md:p-12 text-center">
+                    
+                    <div class="inline-block bg-brand-pink/20 text-brand-pink font-bold px-4 py-1 rounded-full mb-6">
+                        🔥 RISK-FREE TRIAL
+                    </div>
+
+                    <h2 class="font-heading text-4xl md:text-5xl font-bold text-white mb-6">
+                        Try DMCA Masters Risk-Free for 7 Days
+                    </h2>
+
+                    <div class="grid md:grid-cols-2 gap-8 text-left max-w-2xl mx-auto mb-10">
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-brand-pink"></i>
+                                <span><strong>FREE Content Audit</strong> ($297 value)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-brand-pink"></i>
+                                <span>24/7 Monitoring (1,200+ platforms)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-brand-pink"></i>
+                                <span>Unlimited Takedowns</span>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-brand-pink"></i>
+                                <span>Dedicated Account Manager</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-brand-pink"></i>
+                                <span>Weekly Success Reports</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-circle-check text-brand-pink"></i>
+                                <span><strong>100% Money-Back Guarantee</strong></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-xl text-gray-300 mb-8">
+                        Plans starting at less than the cost of <span class="text-white font-bold underline">one subscriber</span>.
+                    </p>
+
+                    <button onclick="openTrialModal()" class="w-full md:w-auto btn-gradient text-white font-heading font-bold text-xl md:text-2xl px-12 py-5 rounded-full shadow-lg shadow-pink-500/40 hover:scale-105 transition transform duration-200">
+                        Claim Your Free Trial <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                    
+                    <p class="text-red-400 mt-4 text-sm font-bold animate-pulse">
+                        <i class="fa-solid fa-clock"></i> Only 15 trial spots available this week
+                    </p>
+                    
+                    <div class="mt-8 flex justify-center gap-6 text-gray-500 text-sm opacity-70">
+                        <span><i class="fa-solid fa-lock"></i> SSL Secure</span>
+                        <span><i class="fa-solid fa-copyright"></i> DMCA Certified</span>
+                        <span><i class="fa-solid fa-user-shield"></i> 100% Confidential</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-heading font-bold text-center text-gray-900 mb-12">Common Questions</h2>
+
+            <div class="space-y-4" id="faq-container">
+                <!-- FAQ Item 1 -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-gray-900">How do you find my leaked content?</span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content bg-gray-50 px-6">
+                        <div class="py-4 text-gray-600">
+                            We use proprietary AI technology combined with manual research to scan over 1,200 piracy sites, forums, Telegram groups, Discord servers, and tube sites. We find leaks that you'd never discover on your own.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-gray-900">How long does it take to remove content?</span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content bg-gray-50 px-6">
+                        <div class="py-4 text-gray-600">
+                            Most takedowns happen within 24-48 hours. Some platforms are slower, but we're relentless and follow up multiple times until the content is gone.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-gray-900">Do I need to give you my login information?</span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content bg-gray-50 px-6">
+                        <div class="py-4 text-gray-600">
+                            Never. We only need links to your public profiles and examples of your content (which we can get from your page). Your account security is paramount.
+                        </div>
+                    </div>
+                </div>
+
+                 <!-- FAQ Item 4 -->
+                 <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-gray-900">What if it doesn't work for me?</span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content bg-gray-50 px-6">
+                        <div class="py-4 text-gray-600">
+                            We offer a 100% money-back guarantee. If we don't find and remove leaks in your first month, you get a full refund. No questions asked.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-24 bg-black relative text-center px-4 overflow-hidden">
+        <!-- Spotlight effect -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-4xl bg-brand-purple/20 blur-[100px] rounded-full"></div>
+        
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <h2 class="text-4xl md:text-6xl font-heading font-extrabold text-white mb-6">
+                Every Day You Wait, <br><span class="text-red-500">You Lose Money.</span>
+            </h2>
+            <p class="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+                Right now, someone is stealing your content and profiting from YOUR hard work. Keep losing $5,000+ per month, or let us handle it.
+            </p>
+            
+            <button onclick="openTrialModal()" class="inline-block btn-gradient text-white font-bold text-xl md:text-2xl px-12 py-6 rounded-full shadow-[0_0_50px_rgba(255,0,110,0.4)] hover:shadow-[0_0_70px_rgba(255,0,110,0.6)] transition-all duration-300 transform hover:-translate-y-1">
+                🛡️ Protect My Content Now
+            </button>
+            
+            <p class="mt-8 text-gray-400">Join 2,000+ creators who've taken back control.</p>
+            <div class="flex flex-wrap justify-center gap-4 mt-4 text-sm text-gray-500">
+                <span>✓ 7-Day Free Trial</span>
+                <span class="hidden sm:inline">•</span>
+                <span>✓ Cancel Anytime</span>
+                <span class="hidden sm:inline">•</span>
+                <span>✓ 100% Money-Back Guarantee</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#0F1419] border-t border-gray-800 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-shield-halved text-brand-pink text-xl"></i>
+                        <span class="font-heading font-bold text-xl text-white">DMCA Masters</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">Protecting creators' earnings and content since 2023.</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-4">Links</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-brand-pink transition">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-brand-pink transition">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-brand-pink transition">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-white font-bold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><i class="fa-regular fa-envelope mr-2"></i> david@dmcamasters.com</li>
+                        <li><i class="fa-regular fa-comments mr-2"></i> Live Chat Available 24/7</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-4">Social Proof</h4>
+                    <div class="flex text-yellow-500 text-sm mb-2">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-sm text-gray-400">Rated 4.9/5 by 2,000+ creators</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+                &copy; 2024 DMCA Masters. All rights reserved. We respect your privacy.
+            </div>
+        </div>
+    </footer>
+
+    <!-- New Trial Modal -->
+    <div id="trial-modal" class="fixed inset-0 z-[110] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="closeTrialModal()"></div>
+        <div class="relative w-full max-w-lg bg-gray-900 rounded-2xl p-8 shadow-2xl border border-gray-700 animate-float z-10">
+            <button onclick="closeTrialModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white transition">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-brand-pink/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-shield-halved text-brand-pink text-2xl"></i>
+                </div>
+                <h3 class="text-2xl font-heading font-bold text-white mb-2">Secure Your Earnings</h3>
+                <p class="text-gray-400">Enter your details to start your free protection trial.</p>
+            </div>
+            
+            <form class="space-y-4" onsubmit="submitTrialForm(event)">
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">Full Name</label>
+                    <input type="text" name="name" required class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition" placeholder="e.g. Sarah Smith">
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">Email Address</label>
+                    <input type="email" name="email" required class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition" placeholder="sarah@example.com">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">What content needs protection?</label>
+                    <textarea name="description" required rows="3" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-brand-pink focus:ring-1 focus:ring-brand-pink transition" placeholder="e.g. My OnlyFans photos are being leaked on Reddit..."></textarea>
+                </div>
+
+                <button type="submit" class="w-full btn-gradient text-white font-bold py-4 rounded-lg transition shadow-lg mt-2">
+                    Start Free Protection Now
+                </button>
+                
+                <p class="text-xs text-center text-gray-500 mt-4">
+                    <i class="fa-solid fa-lock"></i> Your data is 100% encrypted and secure.
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Exit Intent Modal (Hidden by default) -->
+    <!-- Fixed: Changed from absolute positioning to flexbox for better alignment and mobile support -->
+    <div id="exit-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="closeModal()"></div>
+        <!-- Modal Content Container -->
+        <div class="relative w-full max-w-md bg-white rounded-2xl p-8 text-center shadow-2xl animate-float z-10">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            
+            <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa-solid fa-hand text-red-500 text-2xl"></i>
+            </div>
+            
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">WAIT! Don't leave yet.</h3>
+            <p class="text-gray-600 mb-6">Your content could be leaked right now. Get a <span class="font-bold text-brand-pink">FREE Content Audit</span> before you go.</p>
+            
+            <form class="space-y-3" onsubmit="submitExitForm(event)">
+                <input type="email" name="email" required placeholder="Enter your email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-pink text-gray-900">
+                <button type="submit" class="w-full bg-brand-pink hover:bg-pink-600 text-white font-bold py-3 rounded-lg transition shadow-lg">
+                    Send Me My Audit
+                </button>
+            </form>
+            <p class="text-xs text-gray-400 mt-4">No credit card required.</p>
+        </div>
+    </div>
+
+    <!-- Live Ticker -->
+    <div class="fixed bottom-4 left-4 z-40 bg-white/10 backdrop-blur-md border border-white/20 text-white px-4 py-3 rounded-lg shadow-lg hidden md:flex items-center gap-3 animate-float" id="social-proof-toast">
+        <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+        <div class="text-sm">
+            <span class="font-bold">Sarah from LA</span> just started her free trial.
+        </div>
+        <button onclick="document.getElementById('social-proof-toast').style.display='none'" class="text-gray-400 hover:text-white ml-2"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <script>
+        // --- Mobile Menu Toggle ---
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // --- Accordion Logic ---
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('.fa-chevron-down');
+            
+            // Toggle current
+            if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+                content.style.maxHeight = '0px';
+                content.classList.remove('active');
+                icon.style.transform = 'rotate(0deg)';
+                content.style.paddingTop = '0';
+                content.style.paddingBottom = '0';
+            } else {
+                // Close others (optional, keeps it clean)
+                document.querySelectorAll('.accordion-content').forEach(c => {
+                    c.style.maxHeight = '0px';
+                    c.classList.remove('active');
+                    c.style.paddingTop = '0';
+                    c.style.paddingBottom = '0';
+                    c.previousElementSibling.querySelector('.fa-chevron-down').style.transform = 'rotate(0deg)';
+                });
+
+                content.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + 40 + "px"; // + padding
+                icon.style.transform = 'rotate(180deg)';
+                content.style.paddingTop = '1rem';
+                content.style.paddingBottom = '1rem';
+            }
+        }
+
+        // --- Number Counter Animation ---
+        const counters = document.querySelectorAll('.counter');
+        const observerOptions = { threshold: 0.5 };
+
+        const counterObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = +counter.getAttribute('data-target');
+                    const duration = 2000; // 2 seconds
+                    const increment = target / (duration / 16); 
+                    
+                    let current = 0;
+                    const updateCounter = () => {
+                        current += increment;
+                        if (current < target) {
+                            counter.innerText = Math.ceil(current);
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            counter.innerText = target;
+                        }
+                    };
+                    updateCounter();
+                    observer.unobserve(counter);
+                }
+            });
+        }, observerOptions);
+
+        counters.forEach(counter => counterObserver.observe(counter));
+
+        // --- Particle Effect (Simple Canvas) ---
+        const canvas = document.getElementById('particles-js');
+        const ctx = canvas.getContext('2d');
+        let particlesArray;
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.size = size;
+                this.color = color;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = 'rgba(107, 70, 193, 0.4)'; // Brand Purple low opacity
+                ctx.fill();
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) {
+                    this.directionX = -this.directionX;
+                }
+                if (this.y > canvas.height || this.y < 0) {
+                    this.directionY = -this.directionY;
+                }
+                this.x += this.directionX;
+                this.y += this.directionY;
+                this.draw();
+            }
+        }
+
+        function initParticles() {
+            particlesArray = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 15000; // Density
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 3) + 1;
+                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                let directionX = (Math.random() * 0.4) - 0.2;
+                let directionY = (Math.random() * 0.4) - 0.2;
+                let color = '#6B46C1';
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+            }
+        }
+
+        function animateParticles() {
+            requestAnimationFrame(animateParticles);
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+        }
+
+        initParticles();
+        animateParticles();
+
+        window.addEventListener('resize', () => {
+            canvas.width = innerWidth;
+            canvas.height = innerHeight;
+            initParticles();
+        });
+
+        // --- Exit Intent Logic ---
+        let modalShown = false;
+        const modal = document.getElementById('exit-modal');
+
+        function openModal() {
+            modal.classList.remove('hidden');
+            modalShown = true;
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+        }
+
+        // Trigger on mouse leave (Desktop)
+        document.addEventListener('mouseleave', (e) => {
+            if (e.clientY < 0 && !modalShown) {
+                openModal();
+            }
+        });
+
+        // Trigger on timer (Mobile/Fallback) - 30 seconds
+        setTimeout(() => {
+            if (!modalShown) {
+                // Only show if user hasn't scrolled much (idle) or simple timer
+                // openModal(); // Uncomment to enable timer-based popup
+            }
+        }, 30000);
+
+        // --- Social Proof Ticker Rotation ---
+        const names = ["Sarah from LA", "Mike from NYC", "Jess from London", "Alex from Toronto", "Chloe from Miami"];
+        const tickerName = document.querySelector('#social-proof-toast span');
+        
+        setInterval(() => {
+             const randomName = names[Math.floor(Math.random() * names.length)];
+             if(tickerName) tickerName.innerText = randomName;
+        }, 8000);
+
+        // --- Trial Modal Logic ---
+        function openTrialModal() {
+            document.getElementById('trial-modal').classList.remove('hidden');
+        }
+
+        function closeTrialModal() {
+            document.getElementById('trial-modal').classList.add('hidden');
+        }
+
+        async function submitTrialForm(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            
+            // UI Loading State
+            const btn = form.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing...';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch('https://n8n.srv996979.hstgr.cloud/webhook/dmcawebhook', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    alert('Success! Your protection request has been received. We will be in touch shortly.');
+                    closeTrialModal();
+                    form.reset();
+                } else {
+                    alert('Something went wrong. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Connection error. Please try again.');
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        async function submitExitForm(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            
+            // UI Loading State
+            const btn = form.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Sending...';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch('https://n8n.srv996979.hstgr.cloud/webhook/dmcaexitpopupwebhook', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                if (response.ok) {
+                    alert('Your audit request has been sent! We will contact you shortly with your report.');
+                    closeModal();
+                    form.reset();
+                } else {
+                    alert('Something went wrong. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Connection error. Please try again.');
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+    </script>
+</body>
+</html>
