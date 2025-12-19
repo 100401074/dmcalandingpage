@@ -1,21 +1,98 @@
 name: Deploy to Droplet
+
 on:
- push:
- branches: ["main"]
+  push:
+    branches: ["main"]
+
 jobs:
- deploy:
- runs-on: ubuntu-latest
- steps:
- - name: Checkout repo
- uses: actions/checkout@v4
- - name: Install rsync
- run: sudo apt-get update && sudo apt-get install -y rsync
- - name: Setup SSH
- run: |
- mkdir -p ~/.ssh
- echo "${{ secrets.DROPLET_SSH_KEY }}" > ~/.ssh/id_ed25519
- chmod 600 ~/.ssh/id_ed25519
- ssh-keyscan -H ${{ secrets.DROPLET_HOST }} >> ~/.ssh/known_hosts
- - name: Deploy files to Droplet
- run: |
- rsync -avz --delete --exclude ".git" --exclude ".github"
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install rsync
+        run: sudo apt-get update && sudo apt-get install -y rsync
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DROPLET_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H ${{ secrets.DROPLET_HOST }} >> ~/.ssh/known_hosts
+
+      # ================= OPTIONAL: GOOGLE TAG MANAGER AUTO-INJECTION =================
+      - name: Optional GTM injection (disabled by default)
+        run: |
+          python3 - << 'PY'
+          import glob
+          import re
+          import pathlib
+
+          # ■ Student setting:
+          # Leave empty ("") to DISABLE GTM (default)
+          # Put your container ID to ENABLE GTM
+          GTM_ID = ""
+
+          if not GTM_ID:
+              print("GTM is disabled (GTM_ID is empty). Skipping GTM injection.")
+              raise SystemExit(0)
+
+          HEAD = f"""<!-- Google Tag Manager -->
+          <script>(function(w,d,s,l,i){{w[l]=w[l]||[];w[l].push({{'gtm.start':
+          new Date().getTime(),event:'gtm.js'}});var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          }})(window,document,'script','dataLayer','{GTM_ID}');</script>
+          <!-- End Google Tag Manager -->"""
+
+          BODY = f"""<!-- Google Tag Manager (noscript) -->
+          <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={GTM_ID}"
+          height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+          <!-- End Google Tag Manager (noscript) -->"""
+
+          changed = 0
+
+          for path in glob.glob("**/*.html", recursive=True):
+              p = pathlib.Path(path)
+
+              # Safety: do not touch workflow files
+              if ".github" in p.parts:
+                  continue
+
+              html = p.read_text(encoding="utf-8", errors="ignore")
+
+              # Already injected?
+              if GTM_ID in html:
+                  continue
+
+              # Insert HEAD before </head>
+              if re.search(r"</head\s*>", html, flags=re.I):
+                  html = re.sub(
+                      r"</head\s*>",
+                      HEAD + "\n</head>",
+                      html,
+                      count=1,
+                      flags=re.I
+                  )
+
+              # Insert BODY right after <body ...>
+              m = re.search(r"<body[^>]*>", html, flags=re.I)
+              if m:
+                  i = m.end()
+                  html = html[:i] + "\n" + BODY + "\n" + html[i:]
+
+              p.write_text(html, encoding="utf-8")
+              changed += 1
+
+          print(f"GTM injection complete. Updated {changed} HTML file(s).")
+          PY
+      # ================= END OPTIONAL GTM AUTO-INJECTION =================
+
+      - name: Deploy files to Droplet
+        run: |
+          rsync -avz --delete \
+            --exclude ".git" \
+            --exclude ".github" \
+            ./ ${{ secrets.DROPLET_USER }}@${{ secrets.DROPLET_HOST }}:/var/www/lp.dmcamasters.com/
